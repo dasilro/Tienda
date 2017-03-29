@@ -229,13 +229,22 @@
     <Compile Include="App_Start\Startup.Auth.vb" />
     <Compile Include="App_Start\WebApiConfig.vb" />
     <Compile Include="Controllers\AccountController.vb" />
+    <Compile Include="Controllers\ArticulosController.vb" />
+    <Compile Include="Controllers\ClientesController.vb" />
+    <Compile Include="Controllers\LineasPedidosController.vb" />
     <Compile Include="Controllers\ManageController.vb" />
+    <Compile Include="Controllers\PedidosController.vb" />
     <Compile Include="Global.asax.vb">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountViewModels.vb" />
+    <Compile Include="Models\Articulo.vb" />
+    <Compile Include="Models\Cliente.vb" />
     <Compile Include="Models\IdentityModels.vb" />
+    <Compile Include="Models\LineaPedido.vb" />
     <Compile Include="Models\ManageViewModels.vb" />
+    <Compile Include="Models\Pedido.vb" />
+    <Compile Include="Models\TiendaContext.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
     <Compile Include="My Project\Application.Designer.vb">
       <AutoGen>True</AutoGen>
@@ -276,6 +285,7 @@
       <Generator>MyApplicationCodeGenerator</Generator>
       <LastGenOutput>Application.Designer.vb</LastGenOutput>
     </None>
+    <None Include="My Project\PublishProfiles\TiendaDasilroGmailCom - Web Deploy.pubxml" />
     <None Include="My Project\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <CustomToolNamespace>My</CustomToolNamespace>
@@ -306,6 +316,26 @@
     <Content Include="Views\Manage\VerifyPhoneNumber.vbhtml" />
     <Content Include="Views\Shared\Lockout.vbhtml" />
     <Content Include="Views\Shared\_LoginPartial.vbhtml" />
+    <Content Include="Views\Articulos\Create.vbhtml" />
+    <Content Include="Views\Articulos\Delete.vbhtml" />
+    <Content Include="Views\Articulos\Details.vbhtml" />
+    <Content Include="Views\Articulos\Edit.vbhtml" />
+    <Content Include="Views\Articulos\Index.vbhtml" />
+    <Content Include="Views\Clientes\Create.vbhtml" />
+    <Content Include="Views\Clientes\Delete.vbhtml" />
+    <Content Include="Views\Clientes\Details.vbhtml" />
+    <Content Include="Views\Clientes\Edit.vbhtml" />
+    <Content Include="Views\Clientes\Index.vbhtml" />
+    <Content Include="Views\Pedidos\Create.vbhtml" />
+    <Content Include="Views\Pedidos\Delete.vbhtml" />
+    <Content Include="Views\Pedidos\Details.vbhtml" />
+    <Content Include="Views\Pedidos\Edit.vbhtml" />
+    <Content Include="Views\Pedidos\Index.vbhtml" />
+    <Content Include="Views\LineasPedidos\Create.vbhtml" />
+    <Content Include="Views\LineasPedidos\Delete.vbhtml" />
+    <Content Include="Views\LineasPedidos\Details.vbhtml" />
+    <Content Include="Views\LineasPedidos\Edit.vbhtml" />
+    <Content Include="Views\LineasPedidos\Index.vbhtml" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="favicon.ico" />
