@@ -12,27 +12,20 @@ End Code
         <h4>Pedido</h4>
         <hr />
         @Html.ValidationSummary(True, "", New With { .class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(Function(model) model.FacturaID, htmlAttributes:= New With { .class = "control-label col-md-2" })
+            @Html.LabelFor(Function(model) model.ClienteID, "ClienteID", htmlAttributes:=New With {.class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.EditorFor(Function(model) model.FacturaID, New With { .htmlAttributes = New With { .class = "form-control" } })
-                @Html.ValidationMessageFor(Function(model) model.FacturaID, "", New With { .class = "text-danger" })
+                @Html.DropDownList("ClienteID", Nothing, htmlAttributes:=New With {.class = "form-control"})
+                @Html.ValidationMessageFor(Function(model) model.ClienteID, "", New With {.class = "text-danger"})
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(Function(model) model.ClienteID, "ClienteID", htmlAttributes:= New With { .class = "control-label col-md-2" })
+            @Html.LabelFor(Function(model) model.Fecha, htmlAttributes:=New With {.class = "control-label col-md-2"})
             <div class="col-md-10">
-                @Html.DropDownList("ClienteID", Nothing, htmlAttributes:= New With { .class = "form-control" })
-                @Html.ValidationMessageFor(Function(model) model.ClienteID, "", New With { .class = "text-danger" })
-            </div>
-        </div>
-
-        <div class="form-group">
-            @Html.LabelFor(Function(model) model.Fecha, htmlAttributes:= New With { .class = "control-label col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(Function(model) model.Fecha, New With { .htmlAttributes = New With { .class = "form-control" } })
-                @Html.ValidationMessageFor(Function(model) model.Fecha, "", New With { .class = "text-danger" })
+                @Html.EditorFor(Function(model) model.Fecha, New With {.htmlAttributes = New With {.class = "form-control"}})
+                @Html.ValidationMessageFor(Function(model) model.Fecha, "", New With {.class = "text-danger"})
             </div>
         </div>
 

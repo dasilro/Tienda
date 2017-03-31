@@ -14,9 +14,6 @@ End Code
             @Html.DisplayNameFor(Function(model) model.Cliente.Nombre)
         </th>
         <th>
-            @Html.DisplayNameFor(Function(model) model.FacturaID)
-        </th>
-        <th>
             @Html.DisplayNameFor(Function(model) model.Fecha)
         </th>
         <th></th>
@@ -26,9 +23,6 @@ End Code
     @<tr>
         <td>
             @Html.DisplayFor(Function(modelItem) item.Cliente.Nombre)
-        </td>
-        <td>
-            @Html.DisplayFor(Function(modelItem) item.FacturaID)
         </td>
         <td>
             @Html.DisplayFor(Function(modelItem) item.Fecha)

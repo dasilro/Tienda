@@ -19,14 +19,6 @@ End Code
         </dd>
 
         <dt>
-            @Html.DisplayNameFor(Function(model) model.FacturaID)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(Function(model) model.FacturaID)
-        </dd>
-
-        <dt>
             @Html.DisplayNameFor(Function(model) model.Fecha)
         </dt>
 

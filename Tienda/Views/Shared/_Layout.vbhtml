@@ -33,6 +33,7 @@
                             <li><a href="#">Separated link</a></li>
                         </ul>
                     </li>
+                    <li>@Html.ActionLink("Pedidos", "Index", "Pedidos")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>

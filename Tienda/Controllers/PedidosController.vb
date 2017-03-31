@@ -19,12 +19,16 @@ Namespace Controllers
         Private db As New TiendaContext
 
         ' GET: Pedidos
+        <HttpGet>
+        <Route("Index")>
         Async Function Index() As Task(Of ActionResult)
             Dim pedidoes = db.Pedidos.Include(Function(p) p.Cliente)
             Return View(Await pedidoes.ToListAsync())
         End Function
 
         ' GET: Pedidos/Details/5
+        <HttpGet>
+        <Route("Details/{id:integer}")>
         Async Function Details(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -37,6 +41,8 @@ Namespace Controllers
         End Function
 
         ' GET: Pedidos/Create
+        <HttpGet>
+        <Route("Create")>
         Function Create() As ActionResult
             ViewBag.ClienteID = New SelectList(db.Clientes, "ClienteID", "Nombre")
             Return View()
@@ -45,8 +51,9 @@ Namespace Controllers
         ' POST: Pedidos/Create
         'Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        <HttpPost()>
+        <HttpPost>
         <ValidateAntiForgeryToken()>
+        <Route("Create")>
         Async Function Create(<Bind(Include:="PedidoID,FacturaID,ClienteID,Fecha")> ByVal pedido As Pedido) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Pedidos.Add(pedido)
@@ -58,6 +65,8 @@ Namespace Controllers
         End Function
 
         ' GET: Pedidos/Edit/5
+        <HttpGet>
+        <Route("Edit/{id:integer}")>
         Async Function Edit(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -73,8 +82,9 @@ Namespace Controllers
         ' POST: Pedidos/Edit/5
         'Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        <HttpPost()>
+        <HttpPost>
         <ValidateAntiForgeryToken()>
+        <Route("Edit")>
         Async Function Edit(<Bind(Include:="PedidoID,FacturaID,ClienteID,Fecha")> ByVal pedido As Pedido) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Entry(pedido).State = EntityState.Modified
@@ -86,6 +96,8 @@ Namespace Controllers
         End Function
 
         ' GET: Pedidos/Delete/5
+        <HttpGet>
+        <Route("Delete/{id:integer}")>
         Async Function Delete(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -98,9 +110,10 @@ Namespace Controllers
         End Function
 
         ' POST: Pedidos/Delete/5
-        <HttpPost()>
+        <HttpPost>
         <ActionName("Delete")>
         <ValidateAntiForgeryToken()>
+        <Route("Delete/{id:integer}")>
         Async Function DeleteConfirmed(ByVal id As Integer) As Task(Of ActionResult)
             Dim pedido As Pedido = Await db.Pedidos.FindAsync(id)
             db.Pedidos.Remove(pedido)

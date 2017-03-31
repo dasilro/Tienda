@@ -92,7 +92,7 @@ Namespace Controllers
 
         ' GET: Clientes/Delete/5
         <HttpGet>
-        <Route("Delete({id:integer}")>
+        <Route("Delete/{id:integer}")>
         Async Function Delete(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)

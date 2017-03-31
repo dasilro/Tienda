@@ -19,12 +19,14 @@ Namespace Controllers
         Private db As New TiendaContext
 
         ' GET: LineasPedidos        
+        <Route("Index")>
         Async Function Index() As Task(Of ActionResult)
             Dim lineaPedidoes = db.LineaPedidos.Include(Function(l) l.Articulo).Include(Function(l) l.Pedido)
             Return View(Await lineaPedidoes.ToListAsync())
         End Function
 
         ' GET: LineasPedidos/Details/5
+        <Route("Details/{id:integer}")>
         Async Function Details(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -37,6 +39,7 @@ Namespace Controllers
         End Function
 
         ' GET: LineasPedidos/Create
+        <Route("Create")>
         Function Create() As ActionResult
             ViewBag.ArticuloID = New SelectList(db.Articulos, "ArticuloID", "Descripcion")
             ViewBag.PedidoID = New SelectList(db.Pedidos, "PedidoID", "PedidoID")
@@ -48,6 +51,7 @@ Namespace Controllers
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         <HttpPost()>
         <ValidateAntiForgeryToken()>
+        <Route("Create")>
         Async Function Create(<Bind(Include:="LineaPedidoID,PedidoID,ArticuloID,Cantidad,PrecioUnitario,Descuento,PorcentajeIva,TotalBaseImponible")> ByVal lineaPedido As LineaPedido) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.LineaPedidos.Add(lineaPedido)
@@ -60,6 +64,7 @@ Namespace Controllers
         End Function
 
         ' GET: LineasPedidos/Edit/5
+        <Route("Edit/{id:integer}")>
         Async Function Edit(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -78,6 +83,7 @@ Namespace Controllers
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         <HttpPost()>
         <ValidateAntiForgeryToken()>
+        <Route("Edit")>
         Async Function Edit(<Bind(Include:="LineaPedidoID,PedidoID,ArticuloID,Cantidad,PrecioUnitario,Descuento,PorcentajeIva,TotalBaseImponible")> ByVal lineaPedido As LineaPedido) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Entry(lineaPedido).State = EntityState.Modified
@@ -90,6 +96,7 @@ Namespace Controllers
         End Function
 
         ' GET: LineasPedidos/Delete/5
+        <Route("Delete/{id:integer}")>
         Async Function Delete(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -105,6 +112,7 @@ Namespace Controllers
         <HttpPost()>
         <ActionName("Delete")>
         <ValidateAntiForgeryToken()>
+        <Route("Delete/{id:integer}")>
         Async Function DeleteConfirmed(ByVal id As Integer) As Task(Of ActionResult)
             Dim lineaPedido As LineaPedido = Await db.LineaPedidos.FindAsync(id)
             db.LineaPedidos.Remove(lineaPedido)
