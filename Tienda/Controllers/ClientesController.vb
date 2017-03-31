@@ -11,17 +11,23 @@ Imports Tienda
 Imports Tienda.Models
 
 Namespace Controllers
+
+    <RoutePrefix("Clientes")>
     Public Class ClientesController
         Inherits System.Web.Mvc.Controller
 
         Private db As New TiendaContext
 
         ' GET: Clientes
+        <HttpGet>
+        <Route("Index")>
         Async Function Index() As Task(Of ActionResult)
             Return View(Await db.Clientes.ToListAsync())
         End Function
 
         ' GET: Clientes/Details/5
+        <HttpGet>
+        <Route("Details")>
         Async Function Details(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -34,6 +40,8 @@ Namespace Controllers
         End Function
 
         ' GET: Clientes/Create
+        <HttpGet>
+        <Route("Create")>
         Function Create() As ActionResult
             Return View()
         End Function
@@ -43,6 +51,7 @@ Namespace Controllers
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         <HttpPost()>
         <ValidateAntiForgeryToken()>
+        <Route("Create")>
         Async Function Create(<Bind(Include:="ClienteID,Nombre,IdentificadorFiscal")> ByVal cliente As Cliente) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Clientes.Add(cliente)
@@ -53,6 +62,8 @@ Namespace Controllers
         End Function
 
         ' GET: Clientes/Edit/5
+        <HttpGet>
+        <Route("Edit/{id:integer}")>
         Async Function Edit(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -68,7 +79,8 @@ Namespace Controllers
         'Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         <HttpPost()>
-        <ValidateAntiForgeryToken()>
+        <ValidateAntiForgeryToken>
+        <Route("Edit")>
         Async Function Edit(<Bind(Include:="ClienteID,Nombre,IdentificadorFiscal")> ByVal cliente As Cliente) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Entry(cliente).State = EntityState.Modified
@@ -79,6 +91,8 @@ Namespace Controllers
         End Function
 
         ' GET: Clientes/Delete/5
+        <HttpGet>
+        <Route("Delete({id:integer}")>
         Async Function Delete(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -94,6 +108,7 @@ Namespace Controllers
         <HttpPost()>
         <ActionName("Delete")>
         <ValidateAntiForgeryToken()>
+        <Route("Delete/{id:integer}")>
         Async Function DeleteConfirmed(ByVal id As Integer) As Task(Of ActionResult)
             Dim cliente As Cliente = Await db.Clientes.FindAsync(id)
             db.Clientes.Remove(cliente)

@@ -11,7 +11,8 @@ Imports Tienda
 Imports Tienda.Models
 
 Namespace Controllers
-    <ValidateAntiForgeryToken>
+
+    <RoutePrefix("LineasPedidos")>
     Public Class LineasPedidosController
         Inherits System.Web.Mvc.Controller
 
