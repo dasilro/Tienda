@@ -16,10 +16,10 @@ Namespace Models
             MyBase.New("name=TiendaContext")
         End Sub
 
-        Public Property Articuloes As System.Data.Entity.DbSet(Of Articulo)
+        Public Property Articulos As System.Data.Entity.DbSet(Of Articulo)
         Public Property Clientes As System.Data.Entity.DbSet(Of Cliente)
-        Public Property Pedidoes As System.Data.Entity.DbSet(Of Pedido)
-        Public Property LineaPedidoes As System.Data.Entity.DbSet(Of LineaPedido)
+        Public Property Pedidos As System.Data.Entity.DbSet(Of Pedido)
+        Public Property LineaPedidos As System.Data.Entity.DbSet(Of LineaPedido)
     End Class
     
 End Namespace

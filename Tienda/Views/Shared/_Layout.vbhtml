@@ -19,10 +19,21 @@
                     <span class="icon-bar"></span>
                 </button>
                 @Html.ActionLink("Nombre de aplicación", "Index", "Home", New With { .area = "" }, New With { .class = "navbar-brand" })
-            </div>
+            </div>           
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Maestros <span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Articulos", "Index", "Articulos")</li>
+                            <li><a href="#">Another action</a></li>
+                            <li><a href="#">Something else here</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="#">Separated link</a></li>
+                        </ul>
+                    </li>
+                    <li>@Html.ActionLink("Articulos", "Index", "Articulos")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
@@ -30,7 +41,7 @@
             </div>
         </div>
     </div>
-    <div class="container body-content">
+    <div class="container body-content">        
         @RenderBody()
         <hr />
         <footer>

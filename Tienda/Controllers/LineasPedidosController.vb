@@ -11,14 +11,15 @@ Imports Tienda
 Imports Tienda.Models
 
 Namespace Controllers
+    <ValidateAntiForgeryToken>
     Public Class LineasPedidosController
         Inherits System.Web.Mvc.Controller
 
         Private db As New TiendaContext
 
-        ' GET: LineasPedidos
+        ' GET: LineasPedidos        
         Async Function Index() As Task(Of ActionResult)
-            Dim lineaPedidoes = db.LineaPedidoes.Include(Function(l) l.Articulo).Include(Function(l) l.Pedido)
+            Dim lineaPedidoes = db.LineaPedidos.Include(Function(l) l.Articulo).Include(Function(l) l.Pedido)
             Return View(Await lineaPedidoes.ToListAsync())
         End Function
 
@@ -27,7 +28,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim lineaPedido As LineaPedido = Await db.LineaPedidoes.FindAsync(id)
+            Dim lineaPedido As LineaPedido = Await db.LineaPedidos.FindAsync(id)
             If IsNothing(lineaPedido) Then
                 Return HttpNotFound()
             End If
@@ -36,8 +37,8 @@ Namespace Controllers
 
         ' GET: LineasPedidos/Create
         Function Create() As ActionResult
-            ViewBag.ArticuloID = New SelectList(db.Articuloes, "ArticuloID", "Descripcion")
-            ViewBag.PedidoID = New SelectList(db.Pedidoes, "PedidoID", "PedidoID")
+            ViewBag.ArticuloID = New SelectList(db.Articulos, "ArticuloID", "Descripcion")
+            ViewBag.PedidoID = New SelectList(db.Pedidos, "PedidoID", "PedidoID")
             Return View()
         End Function
 
@@ -48,12 +49,12 @@ Namespace Controllers
         <ValidateAntiForgeryToken()>
         Async Function Create(<Bind(Include:="LineaPedidoID,PedidoID,ArticuloID,Cantidad,PrecioUnitario,Descuento,PorcentajeIva,TotalBaseImponible")> ByVal lineaPedido As LineaPedido) As Task(Of ActionResult)
             If ModelState.IsValid Then
-                db.LineaPedidoes.Add(lineaPedido)
+                db.LineaPedidos.Add(lineaPedido)
                 Await db.SaveChangesAsync()
                 Return RedirectToAction("Index")
             End If
-            ViewBag.ArticuloID = New SelectList(db.Articuloes, "ArticuloID", "Descripcion", lineaPedido.ArticuloID)
-            ViewBag.PedidoID = New SelectList(db.Pedidoes, "PedidoID", "PedidoID", lineaPedido.PedidoID)
+            ViewBag.ArticuloID = New SelectList(db.Articulos, "ArticuloID", "Descripcion", lineaPedido.ArticuloID)
+            ViewBag.PedidoID = New SelectList(db.Pedidos, "PedidoID", "PedidoID", lineaPedido.PedidoID)
             Return View(lineaPedido)
         End Function
 
@@ -62,12 +63,12 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim lineaPedido As LineaPedido = Await db.LineaPedidoes.FindAsync(id)
+            Dim lineaPedido As LineaPedido = Await db.LineaPedidos.FindAsync(id)
             If IsNothing(lineaPedido) Then
                 Return HttpNotFound()
             End If
-            ViewBag.ArticuloID = New SelectList(db.Articuloes, "ArticuloID", "Descripcion", lineaPedido.ArticuloID)
-            ViewBag.PedidoID = New SelectList(db.Pedidoes, "PedidoID", "PedidoID", lineaPedido.PedidoID)
+            ViewBag.ArticuloID = New SelectList(db.Articulos, "ArticuloID", "Descripcion", lineaPedido.ArticuloID)
+            ViewBag.PedidoID = New SelectList(db.Pedidos, "PedidoID", "PedidoID", lineaPedido.PedidoID)
             Return View(lineaPedido)
         End Function
 
@@ -82,8 +83,8 @@ Namespace Controllers
                 Await db.SaveChangesAsync()
                 Return RedirectToAction("Index")
             End If
-            ViewBag.ArticuloID = New SelectList(db.Articuloes, "ArticuloID", "Descripcion", lineaPedido.ArticuloID)
-            ViewBag.PedidoID = New SelectList(db.Pedidoes, "PedidoID", "PedidoID", lineaPedido.PedidoID)
+            ViewBag.ArticuloID = New SelectList(db.Articulos, "ArticuloID", "Descripcion", lineaPedido.ArticuloID)
+            ViewBag.PedidoID = New SelectList(db.Pedidos, "PedidoID", "PedidoID", lineaPedido.PedidoID)
             Return View(lineaPedido)
         End Function
 
@@ -92,7 +93,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim lineaPedido As LineaPedido = Await db.LineaPedidoes.FindAsync(id)
+            Dim lineaPedido As LineaPedido = Await db.LineaPedidos.FindAsync(id)
             If IsNothing(lineaPedido) Then
                 Return HttpNotFound()
             End If
@@ -104,8 +105,8 @@ Namespace Controllers
         <ActionName("Delete")>
         <ValidateAntiForgeryToken()>
         Async Function DeleteConfirmed(ByVal id As Integer) As Task(Of ActionResult)
-            Dim lineaPedido As LineaPedido = Await db.LineaPedidoes.FindAsync(id)
-            db.LineaPedidoes.Remove(lineaPedido)
+            Dim lineaPedido As LineaPedido = Await db.LineaPedidos.FindAsync(id)
+            db.LineaPedidos.Remove(lineaPedido)
             Await db.SaveChangesAsync()
             Return RedirectToAction("Index")
         End Function

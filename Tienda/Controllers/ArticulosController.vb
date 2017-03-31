@@ -11,22 +11,28 @@ Imports Tienda
 Imports Tienda.Models
 
 Namespace Controllers
+
+    <RoutePrefix("Articulos")>
     Public Class ArticulosController
         Inherits System.Web.Mvc.Controller
 
         Private db As New TiendaContext
 
         ' GET: Articulos
+        <HttpGet>
+        <Route("Index")>
         Async Function Index() As Task(Of ActionResult)
-            Return View(Await db.Articuloes.ToListAsync())
+            Return View(Await db.Articulos.ToListAsync())
         End Function
 
         ' GET: Articulos/Details/5
+        <HttpGet>
+        <Route("Details/{id:integer}")>
         Async Function Details(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim articulo As Articulo = Await db.Articuloes.FindAsync(id)
+            Dim articulo As Articulo = Await db.Articulos.FindAsync(id)
             If IsNothing(articulo) Then
                 Return HttpNotFound()
             End If
@@ -34,6 +40,7 @@ Namespace Controllers
         End Function
 
         ' GET: Articulos/Create
+        <HttpGet>
         Function Create() As ActionResult
             Return View()
         End Function
@@ -41,11 +48,11 @@ Namespace Controllers
         ' POST: Articulos/Create
         'Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        <HttpPost()>
-        <ValidateAntiForgeryToken()>
+        <HttpPost>
+        <ValidateAntiForgeryToken>
         Async Function Create(<Bind(Include:="ArticuloID,Descripcion,DescripcionLarga,PrecioUnitario")> ByVal articulo As Articulo) As Task(Of ActionResult)
             If ModelState.IsValid Then
-                db.Articuloes.Add(articulo)
+                db.Articulos.Add(articulo)
                 Await db.SaveChangesAsync()
                 Return RedirectToAction("Index")
             End If
@@ -53,11 +60,12 @@ Namespace Controllers
         End Function
 
         ' GET: Articulos/Edit/5
+        <HttpGet>
         Async Function Edit(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim articulo As Articulo = Await db.Articuloes.FindAsync(id)
+            Dim articulo As Articulo = Await db.Articulos.FindAsync(id)
             If IsNothing(articulo) Then
                 Return HttpNotFound()
             End If
@@ -67,8 +75,8 @@ Namespace Controllers
         ' POST: Articulos/Edit/5
         'Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
-        <HttpPost()>
-        <ValidateAntiForgeryToken()>
+        <HttpPost>
+        <ValidateAntiForgeryToken>
         Async Function Edit(<Bind(Include:="ArticuloID,Descripcion,DescripcionLarga,PrecioUnitario")> ByVal articulo As Articulo) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Entry(articulo).State = EntityState.Modified
@@ -79,11 +87,13 @@ Namespace Controllers
         End Function
 
         ' GET: Articulos/Delete/5
+        <HttpGet>
+        <ValidateAntiForgeryToken>
         Async Function Delete(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim articulo As Articulo = Await db.Articuloes.FindAsync(id)
+            Dim articulo As Articulo = Await db.Articulos.FindAsync(id)
             If IsNothing(articulo) Then
                 Return HttpNotFound()
             End If
@@ -95,8 +105,8 @@ Namespace Controllers
         <ActionName("Delete")>
         <ValidateAntiForgeryToken()>
         Async Function DeleteConfirmed(ByVal id As Integer) As Task(Of ActionResult)
-            Dim articulo As Articulo = Await db.Articuloes.FindAsync(id)
-            db.Articuloes.Remove(articulo)
+            Dim articulo As Articulo = Await db.Articulos.FindAsync(id)
+            db.Articulos.Remove(articulo)
             Await db.SaveChangesAsync()
             Return RedirectToAction("Index")
         End Function

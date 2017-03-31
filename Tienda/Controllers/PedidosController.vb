@@ -18,7 +18,7 @@ Namespace Controllers
 
         ' GET: Pedidos
         Async Function Index() As Task(Of ActionResult)
-            Dim pedidoes = db.Pedidoes.Include(Function(p) p.Cliente)
+            Dim pedidoes = db.Pedidos.Include(Function(p) p.Cliente)
             Return View(Await pedidoes.ToListAsync())
         End Function
 
@@ -27,7 +27,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim pedido As Pedido = Await db.Pedidoes.FindAsync(id)
+            Dim pedido As Pedido = Await db.Pedidos.FindAsync(id)
             If IsNothing(pedido) Then
                 Return HttpNotFound()
             End If
@@ -47,7 +47,7 @@ Namespace Controllers
         <ValidateAntiForgeryToken()>
         Async Function Create(<Bind(Include:="PedidoID,FacturaID,ClienteID,Fecha")> ByVal pedido As Pedido) As Task(Of ActionResult)
             If ModelState.IsValid Then
-                db.Pedidoes.Add(pedido)
+                db.Pedidos.Add(pedido)
                 Await db.SaveChangesAsync()
                 Return RedirectToAction("Index")
             End If
@@ -60,7 +60,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim pedido As Pedido = Await db.Pedidoes.FindAsync(id)
+            Dim pedido As Pedido = Await db.Pedidos.FindAsync(id)
             If IsNothing(pedido) Then
                 Return HttpNotFound()
             End If
@@ -88,7 +88,7 @@ Namespace Controllers
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
             End If
-            Dim pedido As Pedido = Await db.Pedidoes.FindAsync(id)
+            Dim pedido As Pedido = Await db.Pedidos.FindAsync(id)
             If IsNothing(pedido) Then
                 Return HttpNotFound()
             End If
@@ -100,8 +100,8 @@ Namespace Controllers
         <ActionName("Delete")>
         <ValidateAntiForgeryToken()>
         Async Function DeleteConfirmed(ByVal id As Integer) As Task(Of ActionResult)
-            Dim pedido As Pedido = Await db.Pedidoes.FindAsync(id)
-            db.Pedidoes.Remove(pedido)
+            Dim pedido As Pedido = Await db.Pedidos.FindAsync(id)
+            db.Pedidos.Remove(pedido)
             Await db.SaveChangesAsync()
             Return RedirectToAction("Index")
         End Function
