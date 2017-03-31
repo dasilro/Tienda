@@ -41,6 +41,7 @@ Namespace Controllers
 
         ' GET: Articulos/Create
         <HttpGet>
+        <Route("Create")>
         Function Create() As ActionResult
             Return View()
         End Function
@@ -50,6 +51,7 @@ Namespace Controllers
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         <HttpPost>
         <ValidateAntiForgeryToken>
+        <Route("Create")>
         Async Function Create(<Bind(Include:="ArticuloID,Descripcion,DescripcionLarga,PrecioUnitario")> ByVal articulo As Articulo) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Articulos.Add(articulo)
@@ -61,6 +63,7 @@ Namespace Controllers
 
         ' GET: Articulos/Edit/5
         <HttpGet>
+        <Route("Edit/{id:integer}")>
         Async Function Edit(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -77,6 +80,7 @@ Namespace Controllers
         'más información vea https://go.microsoft.com/fwlink/?LinkId=317598.
         <HttpPost>
         <ValidateAntiForgeryToken>
+        <Route("Edit")>
         Async Function Edit(<Bind(Include:="ArticuloID,Descripcion,DescripcionLarga,PrecioUnitario")> ByVal articulo As Articulo) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Entry(articulo).State = EntityState.Modified
@@ -88,7 +92,7 @@ Namespace Controllers
 
         ' GET: Articulos/Delete/5
         <HttpGet>
-        <ValidateAntiForgeryToken>
+        <Route("Delete/{id:integer}")>
         Async Function Delete(ByVal id As Integer?) As Task(Of ActionResult)
             If IsNothing(id) Then
                 Return New HttpStatusCodeResult(HttpStatusCode.BadRequest)
@@ -101,9 +105,10 @@ Namespace Controllers
         End Function
 
         ' POST: Articulos/Delete/5
-        <HttpPost()>
-        <ActionName("Delete")>
+        <HttpPost>
         <ValidateAntiForgeryToken()>
+        <ActionName("Delete")>
+        <Route("DeleteConfirmed/{id:integer}")>
         Async Function DeleteConfirmed(ByVal id As Integer) As Task(Of ActionResult)
             Dim articulo As Articulo = Await db.Articulos.FindAsync(id)
             db.Articulos.Remove(articulo)

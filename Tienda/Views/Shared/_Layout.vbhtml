@@ -18,7 +18,7 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                @Html.ActionLink("Nombre de aplicación", "Index", "Home", New With { .area = "" }, New With { .class = "navbar-brand" })
+                @Html.ActionLink("Nombre de aplicación", "Index", "Home", New With {.area = ""}, New With {.class = "navbar-brand"})
             </div>           
             <div class="navbar-collapse collapse">
                 <ul class="nav navbar-nav">
@@ -33,7 +33,6 @@
                             <li><a href="#">Separated link</a></li>
                         </ul>
                     </li>
-                    <li>@Html.ActionLink("Articulos", "Index", "Articulos")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
                 </ul>
