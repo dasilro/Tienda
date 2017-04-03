@@ -1,4 +1,6 @@
-﻿Public Class HomeController
+﻿' Permitimos que vean el home sin logarse.
+' <Authorize>
+Public Class HomeController
     Inherits System.Web.Mvc.Controller
 
     Function Index() As ActionResult

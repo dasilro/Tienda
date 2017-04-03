@@ -12,6 +12,7 @@ Imports Tienda.Models
 
 Namespace Controllers
 
+    <Authorize>
     <RoutePrefix("LineasPedidos")>
     Public Class LineasPedidosController
         Inherits System.Web.Mvc.Controller

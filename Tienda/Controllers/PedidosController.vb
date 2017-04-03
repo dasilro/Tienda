@@ -12,6 +12,7 @@ Imports Tienda.Models
 
 Namespace Controllers
 
+    <Authorize>
     <RoutePrefix("Pedidos")>
     Public Class PedidosController
         Inherits System.Web.Mvc.Controller
