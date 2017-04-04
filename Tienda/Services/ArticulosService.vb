@@ -4,6 +4,7 @@ Imports System
 Imports System.Collections.Generic
 Imports System.Data
 Imports System.Linq
+Imports System.Linq.Expressions
 Imports System.Web
 Imports Tienda.Models
 
@@ -20,8 +21,11 @@ Namespace Tienda.Services
         End Sub
 
 
-        Public Function GetAll() As IList(Of Articulo)
-            Return db.Articulos.ToList()
+        Public Function GetAll(request As DataSourceRequest) As IQueryable(Of Articulo)
+
+            Return GenericService.Read(Me.db, "Articulo", request)
+
+            ' Return db.Articulos.ToList()
             'IList<ProductViewModel> result = New List<ProductViewModel>()
 
             '    result = db.Products.Select(product => New ProductViewModel
@@ -46,8 +50,27 @@ Namespace Tienda.Services
             '    Return result;
         End Function
 
-        Public Function Read() As IEnumerable(Of Articulo)
-            Return GetAll()
+        Public Function Read(request As DataSourceRequest) As IList(Of Articulo)
+
+            Dim resultado As IQueryable(Of Articulo)
+
+            resultado = db.Articulos.AsQueryable()
+
+            ' Aplico el filtro.
+            For Each filtro As Expression(Of Func(Of Articulo, Boolean)) In request.Filtro
+                resultado = resultado.Where(filtro)
+            Next
+
+            ' Aplico el orden.
+            For Each orden As Orden In request.Orden
+                If (orden.Direccion = SortDirection.Ascending) Then
+                    resultado = resultado.OrderBy(Function(a) a.GetType().GetProperty(orden.Campo))
+                End If
+            Next
+
+            ' Aplico paginación
+            resultado.Skip((request.Pagina - 1) * request.TamanyoPagina).Take(request.TamanyoPagina).ToList()
+
         End Function
 
 

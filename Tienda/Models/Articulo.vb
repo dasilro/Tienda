@@ -1,10 +1,10 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
+Imports System.Data.Entity
+Imports Microsoft.AspNet
 
 Public Class Articulo
-
-    <Key>
-    Public Property ArticuloID As Integer
+    Inherits Entity
 
     <Required>
     Public Property Descripcion As String

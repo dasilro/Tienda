@@ -1,9 +1,7 @@
 ﻿Imports System.ComponentModel.DataAnnotations
 
 Public Class Pedido
-
-    <Key>
-    Public Property PedidoID As Integer
+    Inherits Entity
 
     <Required>
     Public Property ClienteID As Integer

@@ -12,7 +12,7 @@ Imports Tienda.Models
 
 Namespace Controllers
 
-    <Authorize>
+
     <RoutePrefix("Articulos")>
     Public Class ArticulosController
         Inherits System.Web.Mvc.Controller

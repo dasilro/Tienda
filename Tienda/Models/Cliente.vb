@@ -1,9 +1,7 @@
 ﻿Imports System.ComponentModel.DataAnnotations
 
 Public Class Cliente
-
-    <Key>
-    Public Property ClienteID() As Integer
+    Inherits Entity
 
     <Required>
     <StringLength(256, ErrorMessage:="El nombre del cliente tendrá entre 3 y 256 caracteres.", MinimumLength:=3)>

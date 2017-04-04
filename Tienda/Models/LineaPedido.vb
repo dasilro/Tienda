@@ -2,9 +2,7 @@
 Imports System.ComponentModel.DataAnnotations
 
 Public Class LineaPedido
-
-    <Key>
-    Public Property LineaPedidoID As Integer
+    Inherits Entity
 
     <Required>
     Public Property PedidoID As Integer

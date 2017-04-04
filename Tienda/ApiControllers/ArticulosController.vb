@@ -8,12 +8,13 @@ Imports System.Web.Http
 Imports System.Web.Http.Description
 Imports Tienda.Models
 
-Namespace ApiControllers
+Namespace Tienda.ApiControllers
+
     Public Class ArticulosController
         Inherits System.Web.Http.ApiController
         Private db As New TiendaContext
         Private _service As Tienda.Services.ArticulosService
-        Public ReadOnly Property service() As Tienda.Services.ArticulosService
+        Public ReadOnly Property Service() As Tienda.Services.ArticulosService
             Get
                 If IsNothing(_service) Then
                     _service = New Tienda.Services.ArticulosService(Me.db)
@@ -25,7 +26,7 @@ Namespace ApiControllers
         ' GET api/product
         Public Function GetArticulos(<DataSourceRequest> Request As DataSourceRequest) As DataSourceResult
 
-            Return service.Read().ToDataSourceResult(Request)
+            Return service.Read(Conversor.Convierte(Request)).ToDataSourceResult(Request)
 
         End Function
 
@@ -52,7 +53,7 @@ Namespace ApiControllers
                 Return BadRequest(ModelState)
             End If
 
-            If Not id = articulo.ArticuloID Then
+            If Not id = articulo.ID Then
                 Return BadRequest()
             End If
 
@@ -81,7 +82,7 @@ Namespace ApiControllers
             db.Articulos.Add(articulo)
             Await db.SaveChangesAsync()
 
-            Return CreatedAtRoute("DefaultApi", New With {.id = articulo.ArticuloID}, articulo)
+            Return CreatedAtRoute("DefaultApi", New With {.id = articulo.ID}, articulo)
         End Function
 
         ' DELETE: api/Articulos/5
@@ -106,7 +107,7 @@ Namespace ApiControllers
         End Sub
 
         Private Function ArticuloExists(ByVal id As Integer) As Boolean
-            Return db.Articulos.Count(Function(e) e.ArticuloID = id) > 0
+            Return db.Articulos.Count(Function(e) e.ID = id) > 0
         End Function
     End Class
 End Namespace
