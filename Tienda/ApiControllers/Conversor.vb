@@ -1,4 +1,5 @@
 ﻿Imports System.Linq.Expressions
+Imports Kendo.Mvc
 
 Namespace Tienda.ApiControllers
 
@@ -12,8 +13,14 @@ Namespace Tienda.ApiControllers
 
             Dim resultado As New Tienda.Services.DataSourceRequest(origen.Page, origen.PageSize, New List(Of Services.Orden), New List(Of Expression))
 
+            ' Orden.
             For Each sort As Kendo.Mvc.SortDescriptor In origen.Sorts
                 resultado.Orden.Add(New Services.Orden(sort.Member, sort.SortDirection))
+            Next
+
+            ' Filtros.
+            For Each filtro As IFilterDescriptor In origen.Filters
+                resultado.Filtro.Add(filtro.CreateFilterExpression(filtro))
             Next
 
             Return resultado

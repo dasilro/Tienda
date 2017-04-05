@@ -9,40 +9,44 @@ Imports Tienda.Models
 Imports Tienda.Tienda.Services
 
 
+Namespace Tienda.Services
 
-Public Class GenericService
-    Public Shared Function Read(db As TiendaContext, clase As String, request As DataSourceRequest) As IList(Of Entity)
+    Public Class GenericService
 
-        Dim resultado As IQueryable(Of Entity)
+        Public Shared Function Read(db As TiendaContext, clase As String, request As DataSourceRequest) As IList(Of Entity)
 
-        Dim tipo As Type = Type.GetType("Tienda." + clase)
+            Dim resultado As IQueryable(Of Entity)
 
-        resultado = db.Set(tipo).AsQueryable()
+            Dim tipo As Type = Type.GetType("Tienda." + clase)
 
-        ' Aplico el filtro.
-        ' For Each filtro As Expression(Of Func(Of Articulo, Boolean)) In request.Filtro
-        ' Dim tipo As Type = Type.GetType("Tienda." + clase)
+            resultado = db.Set(tipo).AsQueryable()
 
-        For Each filtro As Expression(Of Func(Of Entity, Boolean)) In request.Filtro
-            resultado = resultado.Where(filtro)
-        Next
+            ' Aplico el filtro.
+            ' For Each filtro As Expression(Of Func(Of Articulo, Boolean)) In request.Filtro
+            ' Dim tipo As Type = Type.GetType("Tienda." + clase)
 
-        ' Aplico el orden.
-        If request.Orden.Any Then
-            For Each orden As Orden In request.Orden
-                If (orden.Direccion = SortDirection.Ascending) Then
-                    resultado = resultado.OrderBy(Function(a) a.GetType().GetProperty(orden.Campo))
-                End If
+            For Each filtro As Expression(Of Func(Of Entity, Boolean)) In request.Filtro
+                resultado = resultado.Where(filtro)
             Next
-        Else
-            resultado.OrderBy(Function(a) a.ID)
-        End If
 
-        ' Aplico paginación
-        resultado.Skip((request.Pagina - 1) * request.TamanyoPagina).Take(request.TamanyoPagina).ToList()
+            ' Aplico el orden.
+            If request.Orden.Any Then
+                For Each orden As Orden In request.Orden
+                    If (orden.Direccion = SortDirection.Ascending) Then
+                        resultado = resultado.OrderBy(Function(a) a.GetType().GetProperty(orden.Campo))
+                    End If
+                Next
+            Else
+                resultado = resultado.OrderBy(Function(a) a.ID)
+            End If
 
-        Return resultado
+            ' Aplico paginación
+            resultado = resultado.Skip((request.Pagina - 1) * request.TamanyoPagina).Take(request.TamanyoPagina)
 
-    End Function
+            Return resultado.ToList()
 
-End Class
+        End Function
+
+    End Class
+
+End Namespace

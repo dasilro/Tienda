@@ -24,14 +24,14 @@ Namespace Tienda.ApiControllers
                 Return _service
             End Get
         End Property
-
         ' GET api/product
         <HttpGet>
         <Route("GetArticulos", Name:="ApiRoute")>
         Public Function GetArticulos(<System.Web.Http.ModelBinding.ModelBinder(GetType(WebApiDataSourceRequestModelBinder))> Request As DataSourceRequest) As DataSourceResult
-            'Public Function GetArticulos(<DataSourceRequest> Request As DataSourceRequest) As DataSourceResult
-            'TypeOf(WebApiDataSourceRequestModelBinder))]DataSourceRequest
-            Return Service.Read(Conversor.Convierte(Request)).ToDataSourceResult(Request)
+            ' Return Service.Read(Conversor.Convierte(Request)).ToDataSourceResult(Request)
+            ' Return Tienda.Services.GenericService.Read().ToDataSourceResult(Request)
+
+            Return db.Articulos.AsQueryable().ToDataSourceResult(Request)
 
         End Function
 
