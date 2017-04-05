@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel.DataAnnotations
+Imports System.ComponentModel.DataAnnotations.Schema
 
+<Table("Clientes")>
 Public Class Cliente
     Inherits Entity
 

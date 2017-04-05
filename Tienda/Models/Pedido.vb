@@ -1,5 +1,7 @@
 ﻿Imports System.ComponentModel.DataAnnotations
+Imports System.ComponentModel.DataAnnotations.Schema
 
+<Table("Pedidos")>
 Public Class Pedido
     Inherits Entity
 

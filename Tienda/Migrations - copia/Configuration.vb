@@ -9,7 +9,8 @@ Namespace Migrations
         Inherits DbMigrationsConfiguration(Of Models.TiendaContext)
 
         Public Sub New()
-            AutomaticMigrationsEnabled = False
+            AutomaticMigrationsEnabled = True
+            ContextKey = "Tienda.Models.TiendaContext"
         End Sub
 
         Protected Overrides Sub Seed(context As Models.TiendaContext)

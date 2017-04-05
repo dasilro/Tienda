@@ -1,6 +1,8 @@
 ﻿Imports System.ComponentModel
 Imports System.ComponentModel.DataAnnotations
+Imports System.ComponentModel.DataAnnotations.Schema
 
+<Table("LineasPedidos")>
 Public Class LineaPedido
     Inherits Entity
 

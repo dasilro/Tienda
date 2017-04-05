@@ -1,8 +1,10 @@
 ﻿Imports System.ComponentModel
+Imports System.ComponentModel.DataAnnotations.Schema
 Imports System.ComponentModel.DataAnnotations
 Imports System.Data.Entity
 Imports Microsoft.AspNet
 
+<Table("Articulos")>
 Public Class Articulo
     Inherits Entity
 
