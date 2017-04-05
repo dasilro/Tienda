@@ -6,6 +6,10 @@ Namespace Tienda.ApiControllers
 
         Public Shared Function Convierte(origen As Kendo.Mvc.UI.DataSourceRequest) As Tienda.Services.DataSourceRequest
 
+            If (IsNothing(origen)) Then
+                Return New Tienda.Services.DataSourceRequest(1, 10, New List(Of Services.Orden), New List(Of Expression))
+            End If
+
             Dim resultado As New Tienda.Services.DataSourceRequest(origen.Page, origen.PageSize, New List(Of Services.Orden), New List(Of Expression))
 
             For Each sort As Kendo.Mvc.SortDescriptor In origen.Sorts

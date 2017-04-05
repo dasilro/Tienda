@@ -62,14 +62,18 @@ Namespace Tienda.Services
             Next
 
             ' Aplico el orden.
-            For Each orden As Orden In request.Orden
-                If (orden.Direccion = SortDirection.Ascending) Then
-                    resultado = resultado.OrderBy(Function(a) a.GetType().GetProperty(orden.Campo))
-                End If
-            Next
+            If request.Orden.Any Then
+                For Each orden As Orden In request.Orden
+                    If (orden.Direccion = SortDirection.Ascending) Then
+                        resultado = resultado.OrderBy(Function(a) a.GetType().GetProperty(orden.Campo))
+                    End If
+                Next
+            Else
+                resultado = resultado.OrderBy(Function(a) a.ID)
+            End If
 
             ' Aplico paginación
-            resultado.Skip((request.Pagina - 1) * request.TamanyoPagina).Take(request.TamanyoPagina).ToList()
+            Return resultado.Skip((request.Pagina - 1) * request.TamanyoPagina).Take(request.TamanyoPagina).ToList()
 
         End Function
 

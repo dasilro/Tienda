@@ -27,9 +27,10 @@ Namespace Tienda.ApiControllers
 
         ' GET api/product
         <HttpGet>
-        <Route("GetArticulos")>
-        Public Function GetArticulos(<DataSourceRequest> Request As DataSourceRequest) As DataSourceResult
-
+        <Route("GetArticulos", Name:="ApiRoute")>
+        Public Function GetArticulos(<System.Web.Http.ModelBinding.ModelBinder(GetType(WebApiDataSourceRequestModelBinder))> Request As DataSourceRequest) As DataSourceResult
+            'Public Function GetArticulos(<DataSourceRequest> Request As DataSourceRequest) As DataSourceResult
+            'TypeOf(WebApiDataSourceRequestModelBinder))]DataSourceRequest
             Return Service.Read(Conversor.Convierte(Request)).ToDataSourceResult(Request)
 
         End Function
