@@ -10,24 +10,24 @@ End Code
 </p>
 
 @(Html.Kendo().Grid(Of Tienda.Articulo)() _
-                                                                                                                                            .Name("grid") _
-                                                                                                                                            .Columns(Sub(columns)
-                                                                                                                                                         columns.Bound(Function(p) p.ID)
-                                                                                                                                                         columns.Bound(Function(p) p.Descripcion).Width(100)
-                                                                                                                                                         columns.Command(Sub(c) c.Edit()).Width(86)
-                                                                                                                                                         columns.Command(Sub(c) c.Destroy()).Width(86)
-                                                                                                                                                     End Sub) _
-                                                                                                                                                        .Sortable() _
-                                                                                                                                                        .Pageable() _
-                                                                                                                                                        .Filterable() _
-                                                                                                                                                        .DataSource(Function(d) _
-                                                                                                                                                                            d.WebApi() _
-                                                                                                                                                                            .Model(Sub(m)
-                                                                                                                                                                                       m.Id(Function(i) i.ID)
-                                                                                                                                                                                   End Sub) _
-                            .Read(Function(read) read.Action("Person_Read", "GridList")) _
-                            .Events(Function(events) events.Error("error_handler"))
-                          )
+                                                                                                                                                                                .Name("grid") _
+                                                                                                                                                                                .Columns(Sub(columns)
+                                                                                                                                                                                             columns.Bound(Function(p) p.ID)
+                                                                                                                                                                                             columns.Bound(Function(p) p.Descripcion).Width(100)
+                                                                                                                                                                                             ' columns.Command(Sub(c) c.Edit()).Width(86)
+                                                                                                                                                                                             ' columns.Command(Sub(c) c.Destroy()).Width(86)
+                                                                                                                                                                                         End Sub) _
+                                                                                                                                                                                            .Sortable() _
+                                                                                                                                                                                            .Pageable() _
+                                                                                                                                                                                            .Filterable() _
+                                                                                                                                                                                            .DataSource(Function(d) _
+                                                                                                                                                                                                                d.WebApi() _
+                                                                                                                                                                                                                .Model(Sub(m)
+                                                                                                                                                                                                                           m.Id(Function(i) i.ID)
+                                                                                                                                                                                                                       End Sub) _
+                                                                .Read(Function(read) read.Action("GetArticulos", "ApiArticulos")) _
+                                                                .Events(Function(events) events.Error("error_handler"))
+                                                              )
 )
 
 <script>

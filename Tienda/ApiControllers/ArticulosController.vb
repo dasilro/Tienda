@@ -10,8 +10,10 @@ Imports Tienda.Models
 
 Namespace Tienda.ApiControllers
 
-    Public Class ArticulosController
+    <RoutePrefix("ApiArticulos")>
+    Public Class ApiArticulosController
         Inherits System.Web.Http.ApiController
+
         Private db As New TiendaContext
         Private _service As Tienda.Services.ArticulosService
         Public ReadOnly Property Service() As Tienda.Services.ArticulosService
@@ -24,9 +26,11 @@ Namespace Tienda.ApiControllers
         End Property
 
         ' GET api/product
+        <HttpGet>
+        <Route("GetArticulos")>
         Public Function GetArticulos(<DataSourceRequest> Request As DataSourceRequest) As DataSourceResult
 
-            Return service.Read(Conversor.Convierte(Request)).ToDataSourceResult(Request)
+            Return Service.Read(Conversor.Convierte(Request)).ToDataSourceResult(Request)
 
         End Function
 
