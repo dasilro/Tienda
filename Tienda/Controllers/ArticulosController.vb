@@ -82,7 +82,7 @@ Namespace Controllers
         <HttpPost>
         <ValidateAntiForgeryToken>
         <Route("Edit")>
-        Async Function Edit(<Bind(Include:="ArticuloID,Descripcion,DescripcionLarga,PrecioUnitario")> ByVal articulo As Articulo) As Task(Of ActionResult)
+        Async Function Edit(<Bind(Include:="ID,Descripcion,DescripcionLarga,PrecioUnitario")> ByVal articulo As Articulo) As Task(Of ActionResult)
             If ModelState.IsValid Then
                 db.Entry(articulo).State = EntityState.Modified
                 Await db.SaveChangesAsync()
