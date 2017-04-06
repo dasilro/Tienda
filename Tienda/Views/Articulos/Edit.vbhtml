@@ -1,7 +1,9 @@
 ﻿@ModelType Tienda.Articulo
 @Code
     ViewData("Title") = "Edit"
+    Layout = "" 'Si queremos volver a poner el layout (pagina maestra) de nuevo, eliminar o comentar esta linea.
 End Code
+ 
 
 <h2>Edit</h2>
 
@@ -12,7 +14,7 @@ End Code
         <h4>Articulo</h4>
         <hr />
         @Html.ValidationSummary(True, "", New With { .class = "text-danger" })
-        @Html.HiddenFor(Function(model) model.ArticuloID)
+        @Html.HiddenFor(Function(model) model.ID)
 
         <div class="form-group">
             @Html.LabelFor(Function(model) model.Descripcion, htmlAttributes:= New With { .class = "control-label col-md-2" })

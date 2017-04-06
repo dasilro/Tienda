@@ -15,6 +15,7 @@ Namespace Tienda.ApiControllers
         Inherits System.Web.Http.ApiController
 
         Private db As New TiendaContext
+
         Private _service As Tienda.Services.ArticulosService
         Public ReadOnly Property Service() As Tienda.Services.ArticulosService
             Get
@@ -24,20 +25,21 @@ Namespace Tienda.ApiControllers
                 Return _service
             End Get
         End Property
+
         ' GET api/product
         <HttpGet>
-        <Route("GetArticulos", Name:="ApiRoute")>
+        <Route("GetArticulos", Name:="GetArticulos")>
         Public Function GetArticulos(<System.Web.Http.ModelBinding.ModelBinder(GetType(WebApiDataSourceRequestModelBinder))> Request As DataSourceRequest) As DataSourceResult
             ' Return Service.Read(Conversor.Convierte(Request)).ToDataSourceResult(Request)
             ' Return Tienda.Services.GenericService.Read().ToDataSourceResult(Request)
 
-            Return db.Articulos.AsQueryable().ToDataSourceResult(Request)
+            Return db.Articulos.AsNoTracking().AsQueryable().ToDataSourceResult(Request)
 
         End Function
 
         ' GET: api/Articulos
         Function GetArticulos() As IQueryable(Of Articulo)
-            Return db.Articulos
+            Return db.Articulos.AsNoTracking().AsQueryable()
         End Function
 
         ' GET: api/Articulos/5
@@ -53,6 +55,7 @@ Namespace Tienda.ApiControllers
 
         ' PUT: api/Articulos/5
         <ResponseType(GetType(Void))>
+        <Route("PutArticulo", Name:="PutArticulo")>
         Async Function PutArticulo(ByVal id As Integer, ByVal articulo As Articulo) As Task(Of IHttpActionResult)
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
@@ -79,6 +82,7 @@ Namespace Tienda.ApiControllers
 
         ' POST: api/Articulos
         <ResponseType(GetType(Articulo))>
+        <Route("PostArticulo", Name:="PostArticulo")>
         Async Function PostArticulo(ByVal articulo As Articulo) As Task(Of IHttpActionResult)
             If Not ModelState.IsValid Then
                 Return BadRequest(ModelState)
@@ -92,6 +96,8 @@ Namespace Tienda.ApiControllers
 
         ' DELETE: api/Articulos/5
         <ResponseType(GetType(Articulo))>
+        <HttpDelete>
+        <Route("DeleteArticulo", Name:="DeleteArticulo")>
         Async Function DeleteArticulo(ByVal id As Integer) As Task(Of IHttpActionResult)
             Dim articulo As Articulo = Await db.Articulos.FindAsync(id)
             If IsNothing(articulo) Then
