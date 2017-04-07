@@ -13,8 +13,7 @@ Public Class Articulo
 
     Public Property DescripcionLarga As String
 
-    '<DisplayFormat(DataFormatString:="{0:#.##}")>
-    '<RegularExpression("\d+(\.\d{1,2})?", ErrorMessage:="Introduzca un número con dos decimales.")>
+    ' <DisplayFormat(DataFormatString:="{0:###,###,##0.00}")>
     <Required>
     <DefaultValue(0.01)>
     <Range(0.01, 999999999, ErrorMessage:="El precio debe ser un número entre 0.01 y 999999999")>

@@ -1,6 +1,7 @@
 ﻿@ModelType Tienda.Articulo
 @Code
     ViewData("Title") = "Create"
+    Layout = "" 'Si queremos volver a poner el layout (pagina maestra) de nuevo, eliminar o comentar esta linea.
 End Code
 
 <h2>Create</h2>

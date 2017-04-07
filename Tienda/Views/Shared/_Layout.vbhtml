@@ -10,9 +10,13 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/kendo")
-    @Scripts.Render("~/bundles/bootstrap")    
+    @Scripts.Render("~/bundles/bootstrap")           
 </head>
 <body>
+    <script src="@Url.Content("~/Scripts/kendo/cultures/kendo.culture.es-ES.min.js")"></script>
+    <script>
+            kendo.culture("es-ES");
+    </script>
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
@@ -51,7 +55,6 @@
             <p>&copy; @DateTime.Now.Year - Mi aplicación ASP.NET</p>
         </footer>
     </div>
-
     @RenderSection("scripts", required:=False)
 </body>
 </html>
